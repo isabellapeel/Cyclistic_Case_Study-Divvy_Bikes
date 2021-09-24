@@ -1,11 +1,11 @@
-name: "Izzy's Site"
+name: "Cyclistic Case Study"
 navbar:
-  title: "Izzy's Site"
+  title: "Cyclistic Case Study"
   left:
     - text: "Home"
       href: index.html
-    - text: "Journal"
+    - text: "Data Cleaning Process"
       href: Journal.html
-    - text: "Links"
+    - text: "Analysis Report"
       href: Links.html
 output_dir: "docs"
