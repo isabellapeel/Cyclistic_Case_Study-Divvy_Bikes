@@ -1,43 +1,42 @@
 ---
-title: "Izzy Test"
-output: html_document
+title: <br> 
+  Cyclistic Case Study 
+output:   
+  rmdformats::downcute:
+    self_contained: true
 ---
 
-<style type="text/css">
-.title {
-  display: none;
-}
+```{r setup, include=FALSE}
+library(knitr)
+library(rmdformats)
 
-#getting-started img {
-  margin-right: 10px;
-}
+## Global options
+options(max.print="75")
+opts_chunk$set(echo=FALSE,
+               prompt=FALSE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE, 
+               results="hide")
+opts_knit$set(width=75)
 
-</style>
+```
 
-<div class="row" style="padding-top: 30px;">
-<div class="col-sm-6">
+# Summary  
 
-# **My Lab Journal**
+This case study was completed by Isabella Peel in September 2021 as part of the Goggle Data Analytics Professional Certificate capstone unit. R has been used to complete this case study and then hosted online through git. Each tab at the top of this website documents the steps taken to complete this case study. 
 
-This is a template example for lab journaling. Students in Matt Crump's Human Cognition and Performance Lab will use this template to learn R, and other things. Students can replace this text with more fun things. People not in my lab can use this too.
+# Cyclistic Case Study Brief
 
-## How to use
+**Scenario**
 
-1. fork the repo for this website and follow instructions on read me to get set up. [https://github.com/CrumpLab/LabJournalWebsite](https://github.com/CrumpLab/LabJournalWebsite)
+You are a junior data analyst working in the marketing analyst team at Cyclistic, a bike-share company in Chicago. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. Therefore, your team wants to understand how casual riders and annual members use Cyclistic bikes differently. From these insights, your team will design a new marketing strategy to convert casual riders into annual members. But first, Cyclistic executives must approve your recommendations, so they must be backed up with compelling data insights and professional data visualizations.
 
-2. Blog/journal what you are doing in R, by editing the Journal.Rmd. See the [Journal page](https://crumplab.github.io/LabJournalWebsite/Journal.html) for an example of what to do to get started learning R.
+**About the company**
 
-3. See the [links page](https://crumplab.github.io/LabJournalWebsite/Links.html) for lots of helpful links on learning R.
+In 2016, Cyclistic launched a successful bike-share offering. Since then, the program has grown to a fleet of 5,824 bicycles that are geo-tracked and locked into a network of 692 stations across Chicago. The bikes can be unlocked from one station and returned to any other station in the system anytime.
 
-4. Change everything to make it your own.
+Until now, Cyclistic’s marketing strategy relied on building general awareness and appealing to broad consumer segments. One approach that helped make these things possible was the flexibility of its pricing plans: single-ride passes, full-day passes, and annual memberships. Customers who purchase single-ride or full-day passes are referred to as casual riders. Customers who purchase annual memberships are Cyclistic members.
 
-
-</div>
-<div class="col-sm-6">
-
-### [Crump Lab: Human Cognition and Performance](https://crumplab.github.io)
-
-<a href = "https://crumplab.github.io">
-![](images/logo.png)
-</a>
-</div>
+Cyclistic’s finance analysts have concluded that annual members are much more profitable than casual riders. Although the pricing flexibility helps Cyclistic attract more customers, Moreno believes that maximizing the number of annual members will be key to future growth. Rather than creating a marketing campaign that targets all-new customers, Moreno believes there is a very good chance to convert casual riders into members. She notes that casual riders are already aware of the Cyclistic program and have chosen Cyclistic for their mobility needs.
+Lily Moreno (Cyclistic's director of marketing) has set a clear goal: Design marketing strategies aimed at converting casual riders into annual members. In order to do that, however, the marketing analyst team needs to better understand how annual members and casual riders differ, why casual riders would buy a membership, and how digital media could affect their marketing tactics. Moreno and her team are interested in analyzing the Cyclistic historical bike trip data to identify trends.
