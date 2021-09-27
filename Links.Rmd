@@ -1,5 +1,6 @@
 ---
-title:"Analysis Report"
+title: <br> 
+  Analysis Report
 date: "`r Sys.Date()`"
 output:
   rmdformats::downcute:
