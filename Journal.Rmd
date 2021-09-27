@@ -1,5 +1,6 @@
 ---
-title: "Data Cleaning Process"
+title: <br> 
+  Data Cleaning Process
 date: "`r Sys.Date()`"
 output:
   rmdformats::downcute: 
@@ -21,7 +22,7 @@ opts_chunk$set(echo=TRUE,
 opts_knit$set(width=75)
 ```
 
-# Document description 
+# 1. Document description 
 
 This document outlines all of the steps taken to clean and transform Cyclistic's raw datasets to prepare the data for the next stage of analysis. For the purpose of this case study, only data collected between August 2020 - July 2021 will be assessed. The dataset description can be located [here.](https://www.divvybikes.com/system-data)
 
@@ -32,8 +33,8 @@ library(tidyverse)
 library(data.table)
 ```
 
-# 1. Combine datasets 
-### 1.1 Load raw data 
+# 2. Combine datasets 
+### 2.1 Load raw data 
 
 ```{r load individual datasets}
 Aug_20 <- read.csv("C:\\Users\\izzyl\\Documents\\Portfolio\\01. Cyclistic\\02. Raw Data\\202008-divvy-tripdata.csv")
@@ -61,7 +62,7 @@ Jun_21 <- read.csv("C:\\Users\\izzyl\\Documents\\Portfolio\\01. Cyclistic\\02. R
 Jul_21 <- read.csv("C:\\Users\\izzyl\\Documents\\Portfolio\\01. Cyclistic\\02. Raw Data\\202107-divvy-tripdata.csv")
 ```
 
-### 1.2 Check data structure
+### 2.2 Check data structure
 The structure summary outputs will help to identify if any of the individual raw datasets have different string types, column names etc.
 
 ```{r check structures}
@@ -80,7 +81,7 @@ str(Jul_21)
 ```
 
 
-### 1.3 Change string types
+### 2.3 Change string types
 The structure outputs showed that the Aug_20 to Nov_20 datasets listed the start_station_id and end_station_id columns as 'int' string types instead of 'chr' string types as used in the remaining datasets. Prior to merging the raw datasets into one, all of their string types should be the same.
 
 ```{r change string types}
@@ -113,7 +114,7 @@ Nov_20 <- mutate(
   )
 ```
 
-### 1.4 Merge datasets
+### 2.4 Merge datasets
 
 ```{r merge datasets}
 # Merge all 12 individual datasets into one 
@@ -123,8 +124,8 @@ all_trips <- bind_rows(
   )
 ```
 
-# 2. Prepare dataset
-### 2.1 Change date string types 
+# 3. Prepare dataset
+### 3.1 Change date string types 
 The started_at and ended_at columns should be changed from a 'chr' string type to a date string type to help with analysis. 
 
 ```{r change date string types}
@@ -145,7 +146,7 @@ all_trips <- all_trips %>%
   arrange(started_at)
 ```
 
-### 2.2 Calculate ride length 
+### 3.2 Calculate ride length 
 Ride length as a number string type will not only be useful for future analysis but will also help to identify if there are any invalid data points, i.e. ride lengths which are less than 0. 
 
 ```{r ride length}
@@ -162,7 +163,7 @@ all_trips$ride_length <- as.numeric(
   )
 ```
 
-### 2.3 Summarise by date variables
+### 3.3 Summarise by date variables
 Separate columns for year, month, day of week etc. will be useful for future analysis. 
 
 ```{r summarise by variables}
@@ -210,8 +211,8 @@ all_trips$ToD <- format(
 
 ```
 
-# 3. Clean dataset 
-### 3.1 Remove rows with ride length < 0
+# 4. Clean dataset 
+### 4.1 Remove rows with ride length < 0
 As identified in section 2.2 there were a few invalid data points with ride lengths less than 0. These data points should be deleted from the cleaned dataset. 
 
 ```{r remove ride lengths <0}
@@ -220,7 +221,7 @@ all_trips_cleaned <- all_trips %>%
   filter(!(ride_length < 0))
 ```
 
-### 3.2 Remove incomplete rows 
+### 4.2 Remove incomplete rows 
 There were a few instances where there were no recorded station names. These incomplete rows of data should be removed.
 
 ```{r remove blanks - station name}
@@ -238,7 +239,7 @@ all_trips_cleaned <- all_trips_cleaned %>%
 
 ```
 
-### 3.3 Remove tests 
+### 4.3 Remove tests 
 On further inspection of the all_trips_cleaned dataset within the R console, there were a few station names that are fully capitalized text strings instead of adhering to the starting capital letter followed by all lowercase letters string type. In addition, it appeared that the capitalized station names include the word 'TEST' within their string. This observation that test rides have been coded as all capital letters as their station_name was explored using the following code:
 
 ```{r capital letter test}
@@ -271,7 +272,7 @@ all_trips_cleaned <- all_trips_cleaned %>%
   
 ```
 
-### 3.4 Remove duplicates 
+### 4.4 Remove duplicates 
 The ride_id column is unique to each ride. This column should be reviewed to see if there are any duplicates to delete. 
 
 ```{r ride_id check}
@@ -283,8 +284,8 @@ ride_id_check <- all_trips_cleaned %>%
 
 The above code returned no results, no duplicates are recorded in the cleaned dataset. 
 
-# 4. Understand dataset
-### 4.1 Check rideable type 
+# 5. Understand dataset
+### 5.1 Check rideable type 
 ```{r unique rideable_type}
 unique(all_trips_cleaned$rideable_type)
 ```
@@ -319,7 +320,7 @@ rideable_type_check <-all_trips_cleaned %>%
 
 The rideable type check output within the R console showed that "classic_bikes" were added to the dataset from December 2020 onwards. This should be noted for future analysis purposes. 
 
-### 4.2 Check station name 
+### 5.2 Check station name 
 There may have been a few instances where stations were removed or added from Cyclistic's portfolio. This can be reviewed using the following lines of code:
 
 Firstly, a data frame which lists the unique station names should be created. 
@@ -545,8 +546,8 @@ The returned data frames showed that there are a few stations which have been ad
 
 For future analysis purposes, it should be noted that there are a few stations which have most likely been added or removed from Cyclistic's portfolio during the analysis period. 
 
-# 5. Save the dataset 
-### 5.1 Save the cleaned dataset 
+# 6. Save the dataset 
+### 6.1 Save the cleaned dataset 
 The cleaned dataset should be saved as a csv. 
 
 ```{r all_trips_cleaned_save}
@@ -559,7 +560,7 @@ fwrite(
   )
 ```
 
-### 5.2 Save additional useful datasets
+### 6.2 Save additional useful datasets
 The following datasets should also be saved because they may be useful for future analysis purposes. 
 
 ```{r useful datasets}
